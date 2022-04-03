@@ -261,10 +261,10 @@ for (const letter of ALPHABET){
 createEmptyRow(0, rowContainer);
 
 
-setInterval(function(){
-    now = moment().format('h:mm:ss');
-    if (now == "0:00:00"){
-        startGame();
-        restartGame(None, true);
-    }
-}, 1000);
+// setInterval(function(){
+//     now = moment().format('h:mm:ss');
+//     if (now == "0:00:00"){
+//         startGame();
+//         restartGame(None, true);
+//     }
+// }, 1000);
