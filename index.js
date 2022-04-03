@@ -1,4 +1,3 @@
-import moment from '../../node_modules/moment/moment.js';
 
 const W_LENGTH = 5;
 const GUESS_AMOUNT = 6;
@@ -203,13 +202,15 @@ function startGame(){
 }
 
 
-restartButton.addEventListener("click", function restartGame (e){
-    // this is very neccessary, took like 2 hours one night at 2 am
-    restartButton.blur();
-    const target = e.target;
-    
-    if (!target.classList.contains("restart")) {
-        return;
+function restartGame (e, value){
+    if (!value){
+        // this is very neccessary, took like 2 hours one night at 2 am
+        restartButton.blur();
+        const target = e.target;
+        
+        if (!target.classList.contains("restart")) {
+            return;
+        }
     }
     // removes all rows except for the first
     for (let i = rowNumber; i > 0; i--) {
@@ -233,6 +234,11 @@ restartButton.addEventListener("click", function restartGame (e){
     wordList = [];
     gameOver = false;
     
+}
+
+
+restartButton.addEventListener("click", function(e){
+    restartGame(e, false);
 });
 
 
@@ -257,6 +263,6 @@ setInterval(function(){
     now = moment().format('h:mm:ss');
     if (now == "0:00:00"){
         startGame();
-        restartGame();
+        restartGame(None, true);
     }
-}, 1000);
+}, 5000);
