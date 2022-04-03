@@ -257,7 +257,9 @@ for (const letter of ALPHABET){
 
 // console.log(lettersLeft)
 
+
 createEmptyRow(0, rowContainer);
+
 
 setInterval(function(){
     now = moment().format('h:mm:ss');
@@ -265,4 +267,4 @@ setInterval(function(){
         startGame();
         restartGame(None, true);
     }
-}, 5000);
+}, 1000);
