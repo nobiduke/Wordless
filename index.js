@@ -1,6 +1,4 @@
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const moment = require('moment');
+import moment from '../../node_modules/moment/moment.js';
 
 const W_LENGTH = 5;
 const GUESS_AMOUNT = 6;
