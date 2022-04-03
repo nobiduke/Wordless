@@ -1,4 +1,4 @@
-const moment = require("moment");
+import moment from 'moment';
 
 const W_LENGTH = 5;
 const GUESS_AMOUNT = 6;
@@ -197,7 +197,13 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
 });
 
 
-function restartGame (e){
+function startGame(){
+    wordHate.textContent = chooseWord();
+    wordHateAsList = wordHate.textContent.split("");
+}
+
+
+restartButton.addEventListener("click", function restartGame (e){
     // this is very neccessary, took like 2 hours one night at 2 am
     restartButton.blur();
     const target = e.target;
@@ -227,19 +233,11 @@ function restartGame (e){
     wordList = [];
     gameOver = false;
     
-}
-
-
-function startGame(){
-    wordHate.textContent = chooseWord();
-    let wordHateAsList = wordHate.textContent.split("");
-}
-
-
-restartButton.addEventListener("click", restartGame(e));
+});
 
 
 wordHateStart.textContent = "The word we hate today is:";
+let wordHateAsList = [];
 startGame();
 let lettersLeft = [];
 for (const letter of wordHateAsList){
