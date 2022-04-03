@@ -92,6 +92,7 @@ body{
     color: white;
     background-color: #333333;
     font-family: Arial, Helvetica, sans-serif;
+    touch-action: manipulation;
 }
 .page{
     background-color: black;
