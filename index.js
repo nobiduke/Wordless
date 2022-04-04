@@ -19,6 +19,13 @@ let colNumber = 0;
 let totalScore = 0;
 let wordScore = 0;
 
+function isVowel(value){
+    if (value == 'a' || value == 'e' || value == 'i' || value == 'o' || value == 'u'){
+        return true;
+    }
+    return false;
+}
+
 function chooseWord(){
     let index = Math.round(Math.random()*(ANSWER_AMOUNT-1));
     return ANSWERS[index];
@@ -59,7 +66,7 @@ function checkWord(word){
                     alert("Word contains letters from the hated word, how dare you?");
                     return false;
                 }
-                else if(!lettersLeft.includes(letter)){
+                else if(!lettersLeft.includes(letter) && !isVowel(letter)){
                     alert("You have already used one of those letters");
                     return false;
                 }
@@ -87,7 +94,7 @@ function createEmptyLetter(colNum, rowNum){
 
 
 function checkWin(){
-    if (lettersLeft.length < 5){
+    if (lettersLeft.length == 0){
         return true;
     }
     return false;
@@ -155,7 +162,7 @@ function removeRow(rowNum, where){
     // resets the lists that store values
     for (let i = 0; i < 5; i++){
         let value = getKeyValue(rowNumber, i);
-        if((!lettersAdded.includes(value)) && !(value == 'a' || value == 'e' || value == 'i' || value == 'o' || value == 'u')){
+        if((!lettersAdded.includes(value)) && !isVowel(value)){
             lettersAdded.push(value);
             lettersGuessed.pop();
             lettersLeft.push(value);
@@ -211,15 +218,19 @@ document.addEventListener("keyup", function(event){
             lettersLeft = lettersLeft.filter(function(value){
                 if(!wordList.includes(value)){
                     return value;
-                } else if(value == 'a' || value == 'e' || value == 'i' || value == 'o' || value == 'u'){
-                    return value;
                 }
+                // else if(isVowel(value)){
+                //     return value;
+                // }
             });
 
             if (rowNumber > 2){
+                console.log(lettersLeft);
                 if (checkWin()){
                     gameOver = true;
-                    alert("You scored "(totalScore) + " points in " + (rowNumber) + " guesses!");
+                    rowNumber--;
+                    console.log(`Victory with ${totalScore} points`);
+                    alert("You scored " + (totalScore) + " points in " + (rowNumber) + " guesses!");
                 }
             }
             if (!gameOver){
