@@ -266,11 +266,10 @@ document.addEventListener("keyup", function(event){
 
 document.getElementById("keyboard-cont").addEventListener("click", (e) => {
     // console.log(e);
-    const path = e.path;
-    let target = path[0];
+    let target = e.target;
 
     if (!target.classList.contains("keyboard-button")) {
-        target = path[1];
+        target = target.parentNode;
         if (!target.classList.contains("keyboard-button")){
             return;
         }
