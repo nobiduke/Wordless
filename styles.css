@@ -109,7 +109,7 @@ body{
 .top {
     color:darkslateblue;
     text-align:center;
-    font-size:60pt;
+    font-size:50pt;
     font-family:wordless;
 }
 .main{
@@ -150,7 +150,7 @@ body{
     margin-top: 15px;
     justify-content: center;
     align-items: center;
-    padding-right: 20px;
+    margin-left: auto;
 }
 .letter{
     width: 60px;
@@ -166,6 +166,22 @@ body{
     border-width: 2px;
     font-size: 30pt;
     margin: 2px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.score-box{
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    background-color: #333333;
+    vertical-align: middle;
+    color:white;
+    border: 2px solid gold;
+    border-width: 2px;
+    font-size: 30pt;
+    margin-left: 30px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 

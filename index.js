@@ -15,6 +15,8 @@ let wordList = [];
 
 let rowNumber = 0;
 let colNumber = 0;
+let totalScore = 0;
+let wordScore = 0;
 
 function chooseWord(){
     let index = Math.round(Math.random()*(ANSWER_AMOUNT-1));
@@ -23,7 +25,7 @@ function chooseWord(){
 
 function shadeKeyBoard(letter, color) {
     for (const elem of document.getElementsByClassName("keyboard-button")) {
-        if (elem.textContent === letter) {
+        if (elem.textContent.charAt(0) === letter) {
             let oldColor = elem.style.backgroundColor;
             if (oldColor === 'darkgreen') {
                 return;
@@ -101,6 +103,11 @@ function createEmptyRow(number, where){
     for (let i = 0;i<5;i++){
         row.appendChild(createEmptyLetter(i, number));
     }
+    let scoreBox = document.createElement("span");
+    scoreBox.setAttribute("id", "row-"+number.toString()+"score-box");
+    scoreBox.setAttribute("class", "score-box");
+    row.appendChild(scoreBox);
+
     where.appendChild(row);
 };
 
@@ -115,12 +122,35 @@ function removeLetter(rowNum, colNum){
     box.innerHTML = "";
 }
 
+function addScore(amount, rowNum){
+    wordScore += amount;
+    let box = document.getElementById(`row-${rowNum}score-box`);
+    box.innerHTML = wordScore.toString();
+}
+
+function removeScore(amount, rowNum){
+    wordScore -= amount;
+    let box = document.getElementById(`row-${rowNum}score-box`);
+    if (wordScore != 0){
+        box.innerHTML = wordScore.toString();
+    }
+    else{
+        box.innerHTML = "";
+    }
+}
+
+function getKeyValue(rowNum, colNum){
+    let box = document.getElementById(`row-${rowNum}letter-${colNum}`);
+    return box.innerHTML;
+}
+
 document.addEventListener("keyup", function(event){
     // console.log(wordList);
     if (gameOver){return;}
     let key = String(event.key);
     
     if (key == "Backspace" && wordList.length > 0){
+        removeScore(L_POINTS[getKeyValue(rowNumber, colNumber-1)], rowNumber);
         removeLetter(rowNumber, colNumber-1);
         wordList.pop();
         colNumber--;
@@ -133,12 +163,14 @@ document.addEventListener("keyup", function(event){
 
         wordChoice = wordList.join("");
         if(checkWord(wordChoice)){
+            totalScore += wordScore;
+            wordScore = 0;
             rowNumber++;
             for (const letter of wordList){
                 lettersGuessed.push(letter);
                 shadeKeyBoard(letter, 'darkgreen');
             }
-
+            
             lettersLeft = lettersLeft.filter(function(value){if(!wordList.includes(value)){return value}})
 
             if (rowNumber > 4){
@@ -168,7 +200,9 @@ document.addEventListener("keyup", function(event){
         }
         
         insertLetter(rowNumber, colNumber, toAdd);
+        addScore(L_POINTS[toAdd], rowNumber);
         wordList.push(toAdd);
+        
         // console.log(wordList);
         colNumber++;
     }
@@ -188,8 +222,12 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
     if (key == "Del") {
         key = "Backspace";
     }
-    if(wordHateAsList.includes(key)){
+    else if(wordHateAsList.includes(key.charAt(0))){
         return;
+    }
+
+    if(key != "Backspace" && key != "Enter"){
+        key = key.charAt(0);
     }
 
     document.dispatchEvent(new KeyboardEvent("keyup", {'key': key}));
@@ -199,6 +237,14 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
 function startGame(){
     wordHate.textContent = getWord();
     wordHateAsList = wordHate.textContent.split("");
+}
+
+function calcScore(letters){
+    let score = 0;
+    for (const letter of letters){
+        score += L_POINTS[letter];
+    }
+    return score;
 }
 
 
@@ -233,7 +279,8 @@ function restartGame (e, value){
     wordChoice = String;
     wordList = [];
     gameOver = false;
-    
+    totalScore = 0;
+    wordScore = 0;
 }
 
 
@@ -246,6 +293,11 @@ wordHateStart.textContent = "The word we hate today is:";
 let wordHateAsList = [];
 startGame();
 let lettersLeft = [];
+for (const elem of document.getElementsByClassName("keyboard-button")){
+    if (elem.textContent != "Del" && elem.textContent != "Enter"){
+        elem.innerHTML = elem.innerHTML + "<sub>" + L_POINTS[elem.textContent] + "</sub>";
+    }
+}
 for (const letter of wordHateAsList){
     shadeKeyBoard(letter, 'black');
 }
