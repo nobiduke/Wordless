@@ -1,7 +1,8 @@
 
 const W_LENGTH = 5;
 const GUESS_AMOUNT = 6;
-const ANSWER_AMOUNT = 2315
+const ANSWER_AMOUNT = 2315;
+const KEY_BASE_COLOR = "#444444";
 
 let wordHateStart = document.getElementById("hate");
 let rowContainer = document.getElementById("rowContainer");
@@ -58,7 +59,7 @@ function checkWord(word){
                     alert("Word contains letters from the hated word, how dare you?");
                     return false;
                 }
-                else if(lettersGuessed.includes(letter)){
+                else if(!lettersLeft.includes(letter)){
                     alert("You have already used one of those letters");
                     return false;
                 }
@@ -144,17 +145,43 @@ function getKeyValue(rowNum, colNum){
     return box.innerHTML;
 }
 
+function removeRow(rowNum, where){
+    let box = document.getElementById(`row-${rowNum}`);
+    let score = document.getElementById(`row-${rowNum-1}score-box`).innerHTML;
+    where.removeChild(box);
+    rowNumber--;
+    colNumber = 5;
+    let lettersAdded = [];
+    for (let i = 0; i < 5; i++){
+        let value = getKeyValue(rowNumber, i);
+        if((!lettersAdded.includes(value)) && !(value == 'a' || value == 'e' || value == 'i' || value == 'o' || value == 'u')){
+            lettersAdded.push(value);
+            wordList.push(value);
+            lettersGuessed.pop();
+            lettersLeft.push(value);
+        }
+    }
+    totalScore -= score;
+    wordScore = score;
+}
+
 document.addEventListener("keyup", function(event){
     // console.log(wordList);
     if (gameOver){return;}
     let key = String(event.key);
-    
-    if (key == "Backspace" && wordList.length > 0){
-        removeScore(L_POINTS[getKeyValue(rowNumber, colNumber-1)], rowNumber);
-        removeLetter(rowNumber, colNumber-1);
-        wordList.pop();
-        colNumber--;
-        return;
+    if (key == "Backspace"){
+        if (colNumber == 0){
+            if(rowNumber > 0){
+                removeRow(rowNumber, rowContainer);
+            }
+        }
+        else{
+            removeScore(L_POINTS[getKeyValue(rowNumber, colNumber-1)], rowNumber);
+            removeLetter(rowNumber, colNumber-1);
+            wordList.pop();
+            colNumber--;
+            return;
+        }
     }
 
     if (key == "Enter"){
@@ -164,19 +191,27 @@ document.addEventListener("keyup", function(event){
         wordChoice = wordList.join("");
         if(checkWord(wordChoice)){
             totalScore += wordScore;
-            wordScore = 0;
+            console.log(totalScore);
+
             rowNumber++;
+            wordScore = 0;
             for (const letter of wordList){
                 lettersGuessed.push(letter);
                 shadeKeyBoard(letter, 'darkgreen');
             }
             
-            lettersLeft = lettersLeft.filter(function(value){if(!wordList.includes(value)){return value}})
+            lettersLeft = lettersLeft.filter(function(value){
+                if(!wordList.includes(value)){
+                    return value;
+                } else if(value == 'a' || value == 'e' || value == 'i' || value == 'o' || value == 'u'){
+                    return value;
+                }
+            });
 
-            if (rowNumber > 4){
+            if (rowNumber > 2){
                 if (checkWin()){
                     gameOver = true;
-                    alert("Victory in " + (rowNumber) + " guesses!")
+                    alert("You scored "(totalScore) + " points in " + (rowNumber) + " guesses!");
                 }
             }
             if (!gameOver){
@@ -270,9 +305,17 @@ function restartGame (e, value){
     // resets keyboard
     for (const elem of document.getElementsByClassName("keyboard-button")) {
         if (elem.style.backgroundColor === 'darkgreen') {
-            elem.style.backgroundColor = '#333333';
+            elem.style.backgroundColor = KEY_BASE_COLOR;
         }
     }
+
+    lettersLeft = []
+    for (const letter of ALPHABET){
+        if(!wordHateAsList.includes(letter)){
+            lettersLeft.push(letter)
+        }
+    }
+
     rowNumber = 0;
     colNumber = 0;
     lettersGuessed = [];
@@ -280,7 +323,7 @@ function restartGame (e, value){
     wordList = [];
     gameOver = false;
     totalScore = 0;
-    wordScore = 0;
+    removeScore(wordScore, 0);
 }
 
 

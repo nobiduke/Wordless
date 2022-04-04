@@ -999,4 +999,4 @@ const CHOSEN = [
 	"tribe",
 	"spore",
 	"cinch"
-]
+];

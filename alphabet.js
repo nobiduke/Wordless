@@ -25,7 +25,7 @@ const ALPHABET = [
 	"x",
 	"y",
 	"z"
-]
+];
 const L_POINTS = {
 	a: 1,
 	b: 3,
@@ -53,4 +53,4 @@ const L_POINTS = {
 	x: 8,
 	y: 4,
 	z: 10
-}
+};
