@@ -42,7 +42,7 @@ function shadeKeyBoard(letter, color) {
 function checkWord(word){
     // console.log(colNumber)
     // console.log(word.length)
-    // console.log(word)
+    console.log(word)
     if (word.length != W_LENGTH){
         alert("Word isn't long enough.")
         return false;
@@ -147,7 +147,7 @@ function getKeyValue(rowNum, colNum){
 
 function removeRow(rowNum, where){
     let box = document.getElementById(`row-${rowNum}`);
-    let score = document.getElementById(`row-${rowNum-1}score-box`).innerHTML;
+    let score = parseInt(document.getElementById(`row-${rowNum-1}score-box`).innerHTML);
     where.removeChild(box);
     rowNumber--;
     colNumber = 5;
@@ -157,16 +157,17 @@ function removeRow(rowNum, where){
         let value = getKeyValue(rowNumber, i);
         if((!lettersAdded.includes(value)) && !(value == 'a' || value == 'e' || value == 'i' || value == 'o' || value == 'u')){
             lettersAdded.push(value);
-            wordList.push(value);
             lettersGuessed.pop();
             lettersLeft.push(value);
         }
+        wordList.push(value);
     }
     totalScore -= score;
     wordScore = score;
     // resets keyboard
     for (const elem of document.getElementsByClassName("keyboard-button")) {
-        if (elem.style.backgroundColor === 'darkgreen') {
+        let value = elem.innerHTML.charAt(0);
+        if (lettersLeft.includes(value)) {
             elem.style.backgroundColor = KEY_BASE_COLOR;
         }        
     }
