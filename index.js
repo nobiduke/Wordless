@@ -152,6 +152,7 @@ function removeRow(rowNum, where){
     rowNumber--;
     colNumber = 5;
     let lettersAdded = [];
+    // resets the lists that store values
     for (let i = 0; i < 5; i++){
         let value = getKeyValue(rowNumber, i);
         if((!lettersAdded.includes(value)) && !(value == 'a' || value == 'e' || value == 'i' || value == 'o' || value == 'u')){
@@ -163,6 +164,12 @@ function removeRow(rowNum, where){
     }
     totalScore -= score;
     wordScore = score;
+    // resets keyboard
+    for (const elem of document.getElementsByClassName("keyboard-button")) {
+        if (elem.style.backgroundColor === 'darkgreen') {
+            elem.style.backgroundColor = KEY_BASE_COLOR;
+        }        
+    }
 }
 
 document.addEventListener("keyup", function(event){
