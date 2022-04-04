@@ -265,11 +265,15 @@ document.addEventListener("keyup", function(event){
 
 
 document.getElementById("keyboard-cont").addEventListener("click", (e) => {
-    const target = e.target;
-    target.blur()
-    
+    console.log(e)
+    const path = e.path;
+    let target = path[0];
+
     if (!target.classList.contains("keyboard-button")) {
-        return;
+        target = path[1];
+        if (!target.classList.contains("keyboard-button")){
+            return;
+        }
     }
     let key = target.textContent;
 
@@ -285,6 +289,7 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
     }
 
     document.dispatchEvent(new KeyboardEvent("keyup", {'key': key}));
+    target.blur();
 });
 
 
