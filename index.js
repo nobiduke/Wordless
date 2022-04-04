@@ -265,7 +265,7 @@ document.addEventListener("keyup", function(event){
 
 
 document.getElementById("keyboard-cont").addEventListener("click", (e) => {
-    console.log(e);
+    // console.log(e);
     const path = e.path;
     let target = path[0];
 
