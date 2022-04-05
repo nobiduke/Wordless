@@ -236,7 +236,7 @@ document.addEventListener("keyup", function(event){
                     gameOver = true;
                     rowNumber--;
                     console.log(`Victory with ${totalScore} points`);
-                    alert("You scored " + (totalScore) + " points in " + (rowNumber) + " guesses!");
+                    alert("You scored " + (totalScore) + " points in " + (rowNumber+1) + " guesses!");
                 }
             }
             if (!gameOver){
