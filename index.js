@@ -47,9 +47,7 @@ function shadeKeyBoard(letter, color) {
 
 
 function checkWord(word){
-    // console.log(colNumber)
-    // console.log(word.length)
-    console.log(word)
+
     if (word.length != W_LENGTH){
         alert("Word isn't long enough.")
         return false;
@@ -61,14 +59,19 @@ function checkWord(word){
     else{
         for (const letter of wordList){
             for (const reference of wordHateAsList){
-                // console.log(letter + "\t" + reference);
+
                 if (letter == reference){
                     alert("Word contains letters from the hated word, how dare you?");
                     return false;
                 }
                 else if(!lettersLeft.includes(letter) && !isVowel(letter)){
-                    alert("You have already used one of those letters");
+                    alert("You have already used one of those consonants");
                     return false;
+                }
+                if(isVowel(letter)){
+                    if (VOWELS[letter] < 0){
+                        VOWELS[letter] = rowNumber;
+                    }
                 }
             }
         }
@@ -174,14 +177,21 @@ function removeRow(rowNum, where){
     // resets keyboard
     for (const elem of document.getElementsByClassName("keyboard-button")) {
         let value = elem.innerHTML.charAt(0);
+
         if (lettersLeft.includes(value)) {
             elem.style.backgroundColor = KEY_BASE_COLOR;
-        }        
+        }
+        if(isVowel(value)){
+            if(VOWELS[value] == rowNumber){
+                elem.style.backgroundColor = KEY_BASE_COLOR;
+                VOWELS[value] = -1;
+            }
+        }
     }
 }
 
 document.addEventListener("keyup", function(event){
-    // console.log(wordList);
+
     if (gameOver){return;}
     let key = String(event.key);
     if (key == "Backspace"){
@@ -200,13 +210,10 @@ document.addEventListener("keyup", function(event){
     }
 
     if (key == "Enter"){
-        // console.log(wordList);
-        // console.log(lettersLeft);
 
         wordChoice = wordList.join("");
         if(checkWord(wordChoice)){
             totalScore += wordScore;
-            console.log(totalScore);
 
             rowNumber++;
             wordScore = 0;
@@ -225,7 +232,6 @@ document.addEventListener("keyup", function(event){
             });
 
             if (rowNumber > 2){
-                console.log(lettersLeft);
                 if (checkWin()){
                     gameOver = true;
                     rowNumber--;
@@ -257,7 +263,6 @@ document.addEventListener("keyup", function(event){
         addScore(L_POINTS[toAdd], rowNumber);
         wordList.push(toAdd);
         
-        // console.log(wordList);
         colNumber++;
     }
 
@@ -265,7 +270,7 @@ document.addEventListener("keyup", function(event){
 
 
 document.getElementById("keyboard-cont").addEventListener("click", (e) => {
-    // console.log(e);
+
     let target = e.target;
 
     if (!target.classList.contains("keyboard-button")) {
@@ -372,8 +377,6 @@ for (const letter of ALPHABET){
         lettersLeft.push(letter)
     }
 }
-
-// console.log(lettersLeft)
 
 
 createEmptyRow(0, rowContainer);
