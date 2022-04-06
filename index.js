@@ -475,8 +475,6 @@ if (!document.cookie){
     let midnight = new Date();
     midnight.setHours(23,59,59,0);
     document.cookie = `words=0; expires=${midnight}`;
-    
-    createEmptyRow(startRow, rowContainer);
 
 } else{
     cook = document.cookie.split(';')[0].split('=')[1].split(',');
@@ -489,12 +487,12 @@ if (!document.cookie){
             }
         }
         startRow = fillRows(wordsToAdd);
-        createEmptyRow(startRow, rowContainer);
         wordsGuessed = wordsToAdd;
     }
 }
 
 startingUp = false;
+createEmptyRow(startRow, rowContainer);
 
 setInterval(function(){
     now = moment().format('h:mm:ss');
