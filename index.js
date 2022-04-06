@@ -444,6 +444,8 @@ function fillRows(wordsToAdd){
 
 // the start of the page
 
+console.log(document.cookie)
+
 let startRow = 0;
 
 if (!document.cookie){
