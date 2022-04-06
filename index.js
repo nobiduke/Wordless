@@ -490,7 +490,6 @@ if (!document.cookie){
         startRow = fillRows(wordsToAdd);
         wordsGuessed = wordsToAdd;
     }
-    rowNumber = startRow;
 }
 
 startingUp = false;
