@@ -2,7 +2,6 @@ const CHOSEN = [
 	"anime",
 	"cagey",
 	"pulse",
-	"abuse",
 	"pluck",
 	"wheel",
 	"condo",
