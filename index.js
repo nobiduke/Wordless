@@ -459,6 +459,7 @@ let startRow = 0;
 wordHateStart.textContent = "The word we hate today is:";
 let wordHateAsList = [];
 startGame();
+let lettersLeft = [];
 
 if (!document.cookie){
     let midnight = new Date();
@@ -480,7 +481,6 @@ if (!document.cookie){
 
 startingUp = false;
 
-let lettersLeft = [];
 for (const elem of document.getElementsByClassName("keyboard-button")){
     if (elem.textContent != "Del" && elem.textContent != "Enter"){
         elem.innerHTML = elem.innerHTML + "<sub>" + L_POINTS[elem.textContent] + "</sub>";
