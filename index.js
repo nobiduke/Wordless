@@ -466,10 +466,11 @@ if (!document.cookie){
             }
         }
         startRow = fillRows(wordsToAdd);
-        startingUp = false;
         wordsGuessed = wordsToAdd;
     }
 }
+
+startingUp = false;
 
 wordHateStart.textContent = "The word we hate today is:";
 let wordHateAsList = [];
