@@ -432,7 +432,7 @@ restartButton.addEventListener("click", function(e){
 
 function fillRows(wordsToAdd){
     let row = 0;
-    for(row; row < wordsToAdd.length; i++){
+    for(row; row < wordsToAdd.length; row++){
         createEmptyRow(row, rowContainer);
         for(let col = 0; col < W_LENGTH; col++){
             insertLetter(row, col, wordsToAdd[row].charAt(col));
@@ -458,10 +458,10 @@ if (!document.cookie){
                 wordsToAdd.push(word);
             }
         }
+        startRow = fillRows(wordsToAdd);
+        startingUp = false;
+        wordsGuessed = wordsToAdd;
     }
-    startRow = fillRows(wordsToAdd);
-    startingUp = false;
-    wordsGuessed = wordsToAdd;
 }
 
 wordHateStart.textContent = "The word we hate today is:";
