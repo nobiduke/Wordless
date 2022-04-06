@@ -258,6 +258,7 @@ document.addEventListener("keyup", function(event){
                 wordsGuessed.pop();
                 let midnight = new Date();
                 midnight.setHours(23,59,59,0);
+                document.cookie = "words= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
                 document.cookie = `words=${wordsGuessed.toString()}; expires=${midnight}`;
             }
         }
@@ -303,6 +304,7 @@ document.addEventListener("keyup", function(event){
                 wordsGuessed.push(wordChoice);
                 let midnight = new Date();
                 midnight.setHours(23,59,59,0);
+                document.cookie = "words= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
                 document.cookie = `words=${wordsGuessed.toString()}; expires=${midnight}`;
                 console.log(document.cookie);
             }
@@ -421,7 +423,7 @@ function restartGame (e, value){
         }
     }
 
-    document.cookie = 'word=0';
+    document.cookie = "words= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
     rowNumber = 0;
     colNumber = 0;
     lettersGuessed = [];
