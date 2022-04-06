@@ -52,6 +52,7 @@ function shadeKeyBoard(letter, color) {
 
 function checkWord(word){
     console.log(word);
+    console.log(wordList)
     console.log(lettersLeft);
 
     if (word.length != W_LENGTH){
@@ -70,14 +71,15 @@ function checkWord(word){
                     alert("Word contains letters from the hated word, how dare you?");
                     return false;
                 }
-                else if(!lettersLeft.includes(letter) && !isVowel(letter)){
-                    alert("You have already used one of those consonants");
-                    return false;
-                }
-                if(isVowel(letter)){
-                    if (VOWELS[letter] < 0){
-                        VOWELS[letter] = rowNumber;
-                    }
+
+            }
+            if(!lettersLeft.includes(letter) && !isVowel(letter)){
+                alert("You have already used one of those consonants");
+                return false;
+            }
+            if(isVowel(letter)){
+                if (VOWELS[letter] < 0){
+                    VOWELS[letter] = rowNumber;
                 }
             }
         }
