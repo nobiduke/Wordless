@@ -441,7 +441,7 @@ function fillRows(wordsToAdd){
             addScore(L_POINTS[wordsToAdd[row][col]], row);
         }
         let temp = String(wordsToAdd[row]);
-        wordList = temp.split();
+        wordList = temp.split("");
         document.dispatchEvent(new KeyboardEvent("keyup", {'key': 'Enter'}));
     }
     wordList = [];
