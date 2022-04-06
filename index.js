@@ -2,7 +2,9 @@
 const W_LENGTH = 5;
 const GUESS_AMOUNT = 6;
 const ANSWER_AMOUNT = 2315;
-const KEY_BASE_COLOR = "#444444";
+const KEY_BASE_COLOR = "#444444"; // light gray
+const USED_CONSONANT_COLOR = 'darkgreen'; // castleton green
+const USED_VOWEL_COLOR = "dodgerblue"; // #005A9C dodgers blue
 
 let wordHateStart = document.getElementById("hate");
 let rowContainer = document.getElementById("rowContainer");
@@ -35,7 +37,7 @@ function shadeKeyBoard(letter, color) {
     for (const elem of document.getElementsByClassName("keyboard-button")) {
         if (elem.textContent.charAt(0) === letter) {
             let oldColor = elem.style.backgroundColor;
-            if (oldColor === 'darkgreen') {
+            if (oldColor === USED_CONSONANT_COLOR) {
                 return;
             }
 
@@ -218,8 +220,15 @@ document.addEventListener("keyup", function(event){
             rowNumber++;
             wordScore = 0;
             for (const letter of wordList){
-                lettersGuessed.push(letter);
-                shadeKeyBoard(letter, 'darkgreen');
+                if (!lettersGuessed.includes(letter)){
+                    lettersGuessed.push(letter);
+                }
+                if (isVowel(letter)){
+                    shadeKeyBoard(letter, USED_VOWEL_COLOR);
+                }
+                else{
+                    shadeKeyBoard(letter, USED_CONSONANT_COLOR);
+                }
             }
             
             lettersLeft = lettersLeft.filter(function(value){
@@ -332,9 +341,10 @@ function restartGame (e, value){
     }
     // resets keyboard
     for (const elem of document.getElementsByClassName("keyboard-button")) {
-        if (elem.style.backgroundColor === 'darkgreen') {
+        if (elem.style.backgroundColor === USED_CONSONANT_COLOR || elem.style.backgroundColor == USED_VOWEL_COLOR) {
             elem.style.backgroundColor = KEY_BASE_COLOR;
         }
+
     }
 
     lettersLeft = []
