@@ -482,6 +482,7 @@ if (!document.cookie){
     let wordsToAdd = [];
     if(cook[0] != '0'){
         for (const word of cook){
+            console.log(word)
             if (word){
                 wordsToAdd.push(word);
             }
