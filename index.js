@@ -106,6 +106,47 @@ function checkWin(){
 }
 
 
+function createShareText(){
+    let outputText = "Wordless: " + String(totalScore) + " points" + '\n';
+    let containerChildren = document.getElementById("rowContainer").children;
+    for (let i = 0; i < containerChildren.length; i++){
+        let rowChildren = containerChildren[i].children;
+        
+        for(let j = 0; j < rowChildren.length; j++){
+            if(j < W_LENGTH){
+                if (isVowel(rowChildren[j].innerHTML)){
+                    outputText += "🟦";
+                }
+                else{
+                    outputText += "⬛";
+                }
+            }
+            else{
+                outputText += " " + String(rowChildren[j].innerHTML);
+            }
+        }
+        outputText += '\n';
+    }
+    console.log(outputText);
+    return outputText;
+}
+
+
+function victoryPopup() {
+    let vText = document.getElementById("victory-text");
+    vText.innerHTML = `Victory in ${rowNumber+1} guesses. ${totalScore} points`
+    let popup = document.getElementById("the-popup");
+    popup.classList.toggle("show");
+    
+    let outputText = createShareText();
+    let shareButton = document.getElementById("share-button");
+    shareButton.addEventListener("click", function(e){
+        navigator.clipboard.writeText(outputText);
+        shareButton.blur();
+        popup.classList.toggle("show");
+    })
+  }
+
 function createEmptyRow(number, where){
     // initialize the row
     let row = document.createElement("div");
@@ -245,7 +286,7 @@ document.addEventListener("keyup", function(event){
                     gameOver = true;
                     rowNumber--;
                     console.log(`Victory with ${totalScore} points`);
-                    alert("You scored " + (totalScore) + " points in " + (rowNumber+1) + " guesses!");
+                    victoryPopup();
                 }
             }
             if (!gameOver){
@@ -363,7 +404,6 @@ function restartGame (e, value){
     totalScore = 0;
     removeScore(wordScore, 0);
 }
-
 
 restartButton.addEventListener("click", function(e){
     restartGame(e, false);
