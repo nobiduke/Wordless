@@ -418,6 +418,7 @@ function restartGame (e, value){
     }
 
     document.cookie = "words= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+    wordsGuessed = [];
     rowNumber = 0;
     colNumber = 0;
     lettersGuessed = [];
