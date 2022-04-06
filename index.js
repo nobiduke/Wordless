@@ -51,7 +51,6 @@ function shadeKeyBoard(letter, color) {
 
 
 function checkWord(word){
-    console.log(wordList);
 
     if (word.length != W_LENGTH){
         alert("Word isn't long enough.")
@@ -131,7 +130,6 @@ function createShareText(){
         }
         outputText += '\n';
     }
-    console.log(outputText);
     return outputText;
 }
 
@@ -155,6 +153,7 @@ function victoryPopup() {
         }
         else{
             navigator.clipboard.writeText(outputText);
+            alert("Copied to clipboard");
         }
         popup.classList.toggle("show");
     });
@@ -308,7 +307,6 @@ document.addEventListener("keyup", function(event){
                 midnight.setHours(23,59,59,0);
                 document.cookie = "words= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
                 document.cookie = `words=${wordsGuessed.toString()}; expires=${midnight}`;
-                console.log(document.cookie);
             }
 
             if (rowNumber > 2){
@@ -481,7 +479,6 @@ if (!document.cookie){
     let wordsToAdd = [];
     if(cook[0] != '0'){
         for (const word of cook){
-            console.log(word)
             if (word){
                 wordsToAdd.push(word);
             }
