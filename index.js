@@ -51,6 +51,8 @@ function shadeKeyBoard(letter, color) {
 
 
 function checkWord(word){
+    console.log(word);
+    console.log(lettersLeft);
 
     if (word.length != W_LENGTH){
         alert("Word isn't long enough.")
