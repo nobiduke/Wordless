@@ -440,9 +440,8 @@ function fillRows(wordsToAdd){
             insertLetter(row, col, wordsToAdd[row].charAt(col));
             addScore(L_POINTS[wordsToAdd[row][col]], row);
         }
-        console.log(wordsToAdd);
-        console.log(wordsToAdd[row].split());
-        wordList = wordsToAdd[row].split();
+        let temp = String(wordsToAdd[row]);
+        wordList = temp.split();
         document.dispatchEvent(new KeyboardEvent("keyup", {'key': 'Enter'}));
     }
     wordList = [];
