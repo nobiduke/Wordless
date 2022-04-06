@@ -51,9 +51,7 @@ function shadeKeyBoard(letter, color) {
 
 
 function checkWord(word){
-    console.log(word);
-    console.log(wordList)
-    console.log(lettersLeft);
+    console.log(wordList);
 
     if (word.length != W_LENGTH){
         alert("Word isn't long enough.")
@@ -442,6 +440,8 @@ function fillRows(wordsToAdd){
             insertLetter(row, col, wordsToAdd[row].charAt(col));
             addScore(L_POINTS[wordsToAdd[row][col]], row);
         }
+        console.log(wordsToAdd);
+        console.log(wordsToAdd[row].split());
         wordList = wordsToAdd[row].split();
         document.dispatchEvent(new KeyboardEvent("keyup", {'key': 'Enter'}));
     }
