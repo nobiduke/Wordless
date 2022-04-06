@@ -139,12 +139,24 @@ function victoryPopup() {
     popup.classList.toggle("show");
     
     let outputText = createShareText();
-    let shareButton = document.getElementById("share-button");
-    shareButton.addEventListener("click", function(e){
-        navigator.clipboard.writeText(outputText);
-        shareButton.blur();
-        popup.classList.toggle("show");
-    })
+    
+    if (navigator.share) {
+        navigator.share({
+          title: document.title,
+          text: createShareText(),
+          url: window.location.href
+        })
+        .then(() => console.log('Successful share'))
+        .catch(error => console.log('Error sharing:', error));
+    }
+    else{
+        let shareButton = document.getElementById("share-button");
+        shareButton.addEventListener("click", function(e){
+            navigator.clipboard.writeText(outputText);
+            shareButton.blur();
+            popup.classList.toggle("show");
+        })
+    }
   }
 
 function createEmptyRow(number, where){
