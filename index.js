@@ -11,9 +11,11 @@ let rowContainer = document.getElementById("rowContainer");
 let wordHate = document.getElementById("wordOfTheDay");
 let restartButton = document.getElementById("restart-button");
 
+let startingUp = true;
 let gameOver = false;
 let wordChoice = String;
 let lettersGuessed = [];
+let wordsGuessed = [];
 let wordList = [];
 
 let rowNumber = 0;
@@ -253,6 +255,8 @@ document.addEventListener("keyup", function(event){
         if (colNumber == 0){
             if(rowNumber > 0){
                 removeRow(rowNumber, rowContainer);
+                wordsGuessed.pop();
+                document.cookie['words'] = wordsGuessed.toString();
             }
         }
         else{
@@ -292,6 +296,11 @@ document.addEventListener("keyup", function(event){
                 //     return value;
                 // }
             });
+
+            if (!startingUp){
+                wordsGuessed.push(wordChoice);
+                document.cookie['words'] = wordsGuessed.toString();
+            }
 
             if (rowNumber > 2){
                 if (checkWin()){
@@ -421,6 +430,39 @@ restartButton.addEventListener("click", function(e){
     restartGame(e, false);
 });
 
+function fillRows(wordsToAdd){
+    let row = 0;
+    for(row; row < wordsToAdd.length; i++){
+        createEmptyRow(row, rowContainer);
+        for(let col = 0; col < W_LENGTH; col++){
+            insertLetter(row, col, wordsToAdd[row].charAt(col));
+        }
+        document.dispatchEvent(new KeyboardEvent("keyup", {'key': 'Enter'}));
+    }
+    return row;
+}
+
+// the start of the page
+
+let startRow = 0;
+
+if (!document.cookie){
+    let midnight = new Date();
+    midnight.setHours(23,59,59,0);
+    document.cookie = `words=0; expires=${midnight}`;
+} else{
+    let wordsToAdd = [];
+    if(document.cookie['words'] != 0){
+        for (const word of document.cookie.split(';')[0].split('=')[1].split(',')){
+            if (word){
+                wordsToAdd.push(word);
+            }
+        }
+    }
+    startRow = fillRows(wordsToAdd);
+    startingUp = false;
+    wordsGuessed = wordsToAdd;
+}
 
 wordHateStart.textContent = "The word we hate today is:";
 let wordHateAsList = [];
@@ -441,12 +483,16 @@ for (const letter of ALPHABET){
 }
 
 
-createEmptyRow(0, rowContainer);
+createEmptyRow(startRow, rowContainer);
 
 
 setInterval(function(){
     now = moment().format('h:mm:ss');
+    let midnight = new Date();
+    midnight.setHours(23,59,59,0);
+
     if (now == "0:00:00"){
+        document.cookie = `words=0; expires=${midnight}`;
         startGame();
         restartGame(None, true);
     }
