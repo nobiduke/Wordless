@@ -319,7 +319,7 @@ document.addEventListener("keyup", function(event){
                     victoryPopup();
                 }
             }
-            if (!gameOver){
+            if (!gameOver && !startingUp){
                 colNumber = 0;
                 wordList = [];
                 createEmptyRow(rowNumber, rowContainer);
