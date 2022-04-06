@@ -380,14 +380,6 @@ function startGame(){
     wordHateAsList = wordHate.textContent.split("");
 }
 
-function calcScore(letters){
-    let score = 0;
-    for (const letter of letters){
-        score += L_POINTS[letter];
-    }
-    return score;
-}
-
 
 function restartGame (e, value){
     if (!value){
@@ -461,6 +453,20 @@ let wordHateAsList = [];
 startGame();
 let lettersLeft = [];
 
+for (const elem of document.getElementsByClassName("keyboard-button")){
+    if (elem.textContent != "Del" && elem.textContent != "Enter"){
+        elem.innerHTML = elem.innerHTML + "<sub>" + L_POINTS[elem.textContent] + "</sub>";
+    }
+}
+for (const letter of wordHateAsList){
+    shadeKeyBoard(letter, 'black');
+}
+for (const letter of ALPHABET){
+    if(!wordHateAsList.includes(letter)){
+        lettersLeft.push(letter)
+    }
+}
+
 if (!document.cookie){
     let midnight = new Date();
     midnight.setHours(23,59,59,0);
@@ -480,20 +486,6 @@ if (!document.cookie){
 }
 
 startingUp = false;
-
-for (const elem of document.getElementsByClassName("keyboard-button")){
-    if (elem.textContent != "Del" && elem.textContent != "Enter"){
-        elem.innerHTML = elem.innerHTML + "<sub>" + L_POINTS[elem.textContent] + "</sub>";
-    }
-}
-for (const letter of wordHateAsList){
-    shadeKeyBoard(letter, 'black');
-}
-for (const letter of ALPHABET){
-    if(!wordHateAsList.includes(letter)){
-        lettersLeft.push(letter)
-    }
-}
 
 rowNumber = startRow;
 createEmptyRow(startRow, rowContainer);
