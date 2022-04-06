@@ -256,7 +256,9 @@ document.addEventListener("keyup", function(event){
             if(rowNumber > 0){
                 removeRow(rowNumber, rowContainer);
                 wordsGuessed.pop();
-                document.cookie['words'] = wordsGuessed.toString();
+                let midnight = new Date();
+                midnight.setHours(23,59,59,0);
+                document.cookie = `words=${wordsGuessed.toString()}; expires=${midnight}`;
             }
         }
         else{
@@ -299,7 +301,9 @@ document.addEventListener("keyup", function(event){
 
             if (!startingUp){
                 wordsGuessed.push(wordChoice);
-                document.cookie['words'] = wordsGuessed.toString();
+                let midnight = new Date();
+                midnight.setHours(23,59,59,0);
+                document.cookie = `words=${wordsGuessed.toString()}; expires=${midnight}`;
             }
 
             if (rowNumber > 2){
