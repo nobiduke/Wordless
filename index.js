@@ -153,10 +153,10 @@ function victoryPopup() {
         }
         else{
             navigator.clipboard.writeText(outputText);
-            shareButton.blur();
-            popup.classList.toggle("show");
         }
     });
+    shareButton.blur();
+    popup.classList.toggle("show");
   }
 
 function createEmptyRow(number, where){
