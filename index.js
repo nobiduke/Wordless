@@ -152,9 +152,9 @@ function victoryPopup() {
             .catch(error => console.log('Error sharing:', error));
         }
         else{
-            navigator.clipboard.writeText(outputText);
             alert("Copied to clipboard");
         }
+        navigator.clipboard.writeText(outputText);
         popup.classList.toggle("show");
     });
     shareButton.blur();
