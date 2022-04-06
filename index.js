@@ -443,8 +443,10 @@ function fillRows(wordsToAdd){
         for(let col = 0; col < W_LENGTH; col++){
             insertLetter(row, col, wordsToAdd[row].charAt(col));
         }
+        wordList = wordsToAdd[row].split();
         document.dispatchEvent(new KeyboardEvent("keyup", {'key': 'Enter'}));
     }
+    wordList = [];
     return row;
 }
 
