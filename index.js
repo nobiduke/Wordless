@@ -452,9 +452,8 @@ if (!document.cookie){
     document.cookie = `words=0; expires=${midnight}`;
 } else{
     cook = document.cookie.split(';')[0].split('=')[1].split(',');
-    console.log(cook);
     let wordsToAdd = [];
-    if(document.cookie['words'] != 0){
+    if(cook[0] != '0'){
         for (const word of cook){
             if (word){
                 wordsToAdd.push(word);
