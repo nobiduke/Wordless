@@ -451,6 +451,7 @@ if (!document.cookie){
     midnight.setHours(23,59,59,0);
     document.cookie = `words=0; expires=${midnight}`;
 } else{
+    console.log(document.cookie)
     console.log(document.cookie['words']);
     let wordsToAdd = [];
     if(document.cookie['words'] != 0){
