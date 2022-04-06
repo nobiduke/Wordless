@@ -444,8 +444,6 @@ function fillRows(wordsToAdd){
 
 // the start of the page
 
-console.log(document.cookie)
-
 let startRow = 0;
 
 if (!document.cookie){
@@ -453,11 +451,11 @@ if (!document.cookie){
     midnight.setHours(23,59,59,0);
     document.cookie = `words=0; expires=${midnight}`;
 } else{
-    console.log(document.cookie)
-    console.log(document.cookie['words']);
+    cook = document.cookie.split(';')[0].split('=')[1].split(',');
+    console.log(cook);
     let wordsToAdd = [];
     if(document.cookie['words'] != 0){
-        for (const word of document.cookie.split(';')[0].split('=')[1].split(',')){
+        for (const word of cook){
             if (word){
                 wordsToAdd.push(word);
             }
