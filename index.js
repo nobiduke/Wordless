@@ -134,7 +134,7 @@ function createShareText(){
 
 function victoryPopup() {
     let vText = document.getElementById("victory-text");
-    vText.innerHTML = `Victory in ${rowNumber+1} guesses. ${totalScore} points`
+    vText.innerHTML = `Victory in ${rowNumber+1} guesses\n ${totalScore} points`
     let popup = document.getElementById("the-popup");
     popup.classList.toggle("show");
     

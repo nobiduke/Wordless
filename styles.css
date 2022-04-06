@@ -229,21 +229,20 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
   
-/* The actual popup */
 .popup .popuptext {
     visibility: hidden;
     width: 320px;
-    background-color: #444;
+    background-color: black;
     color: #fff;
     text-align: center;
     border-radius: 6px;
+    border: 2px solid white;
     padding: 8px 0;
     position: absolute;
     z-index: 1;
@@ -267,8 +266,13 @@ body{
     background-color: #555;
     font-family: Arial, Helvetica, sans-serif;
     text-transform: uppercase;
+    padding: 10px;
+    font-size: larger;
     color: white;
+    cursor: pointer;
 }
 .victory-text{
     font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+    margin-bottom: 60px;
 }
