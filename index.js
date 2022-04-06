@@ -115,10 +115,10 @@ function createShareText(){
         for(let j = 0; j < rowChildren.length; j++){
             if(j < W_LENGTH){
                 if (isVowel(rowChildren[j].innerHTML)){
-                    outputText += "🟦";
+                    outputText += "⬛";
                 }
                 else{
-                    outputText += "⬛";
+                    outputText += "🟩";
                 }
             }
             else{
