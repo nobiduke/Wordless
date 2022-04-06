@@ -139,8 +139,6 @@ function createShareText(){
 function victoryPopup() {
     let vText = document.getElementById("victory-text");
     vText.innerHTML = `Victory in ${rowNumber+1} guesses\n ${totalScore} points`
-    let popup = document.getElementById("the-popup");
-    popup.classList.toggle("show");
     
     let outputText = createShareText();
     
@@ -158,8 +156,10 @@ function victoryPopup() {
         else{
             navigator.clipboard.writeText(outputText);
         }
+        popup.classList.toggle("show");
     });
     shareButton.blur();
+    let popup = document.getElementById("the-popup");
     popup.classList.toggle("show");
   }
 
