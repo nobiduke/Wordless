@@ -304,6 +304,7 @@ document.addEventListener("keyup", function(event){
                 let midnight = new Date();
                 midnight.setHours(23,59,59,0);
                 document.cookie = `words=${wordsGuessed.toString()}; expires=${midnight}`;
+                console.log(document.cookie);
             }
 
             if (rowNumber > 2){
@@ -420,6 +421,7 @@ function restartGame (e, value){
         }
     }
 
+    document.cookie = 'word=0';
     rowNumber = 0;
     colNumber = 0;
     lettersGuessed = [];
