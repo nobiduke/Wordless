@@ -489,6 +489,7 @@ if (!document.cookie){
             }
         }
         startRow = fillRows(wordsToAdd);
+        createEmptyRow(startRow, rowContainer);
         wordsGuessed = wordsToAdd;
     }
 }
