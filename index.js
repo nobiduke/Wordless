@@ -492,7 +492,9 @@ if (!document.cookie){
 }
 
 startingUp = false;
-createEmptyRow(startRow, rowContainer);
+if (!gameOver){    
+    createEmptyRow(startRow, rowContainer);
+}
 
 setInterval(function(){
     now = moment().format('h:mm:ss');
