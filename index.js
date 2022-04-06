@@ -492,7 +492,7 @@ for (const letter of ALPHABET){
     }
 }
 
-
+rowNumber = startRow;
 createEmptyRow(startRow, rowContainer);
 
 
