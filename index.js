@@ -151,9 +151,8 @@ function victoryPopup() {
             .then(() => console.log('Successful share'))
             .catch(error => console.log('Error sharing:', error));
         }
-        else{
-            alert("Copied to clipboard");
-        }
+        
+        alert("Copied to clipboard");
         navigator.clipboard.writeText(outputText);
         popup.classList.toggle("show");
     });
