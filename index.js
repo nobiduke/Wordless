@@ -495,10 +495,9 @@ if (!document.cookie){
 } else{
     console.log(document.cookie);
     splitcookie = document.cookie.split(';')
-    let cook = [];
     for (const cooky of splitcookie){
         if (cooky.split('=')[0] == 'words'){
-            cook = cooky.split('=')[1].split(',');
+            var cook = cooky.split('=')[1].split(',');
         }
         else if(cooky.split('=')[0] == 'rounds'){
             overallRounds = cooky.split('=')[1];
@@ -506,11 +505,12 @@ if (!document.cookie){
             overallPoints = cooky.split('=')[1];
         }
     }
-    if(splitcookie.length <= 2){
+    if(splitcookie.length < 2){
         document.cookie = `rounds=0; expires=${nineMonths}`;
         document.cookie = `points=0; expires=${nineMonths}`;
     }
     let wordsToAdd = [];
+    console.log(cook);
     if(cook[0] != '0'){
         for (const word of cook){
             if (word){
