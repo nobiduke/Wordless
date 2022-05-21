@@ -510,8 +510,8 @@ if (!document.cookie){
         document.cookie = `rounds=0; expires=${nineMonths}`;
         document.cookie = `points=0; expires=${nineMonths}`;
     } else{
-        overallRounds = splitcookie[2].split('=')[1];
-        overallPoints = splitcookie[4].split('=')[1];
+        overallRounds = splitcookie[1].split('=')[1];
+        overallPoints = splitcookie[2].split('=')[1];
     }
 }
 
