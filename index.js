@@ -495,7 +495,21 @@ if (!document.cookie){
 } else{
     console.log(document.cookie);
     splitcookie = document.cookie.split(';')
-    cook = splitcookie[0].split('=')[1].split(',');
+    let cook = [];
+    for (const cooky of splitcookie){
+        if (cooky.split('=')[0] == 'words'){
+            cook = cooky.split('=')[1].split(',');
+        }
+        else if(cooky.split('=')[0] == 'rounds'){
+            overallRounds = splitcookie[1].split('=')[1];
+        } else if (cooky.split('=')[0] == 'points'){
+            overallPoints = splitcookie[2].split('=')[1];
+        }
+    }
+    if(splitcookie.length <= 2){
+        document.cookie = `rounds=0; expires=${nineMonths}`;
+        document.cookie = `points=0; expires=${nineMonths}`;
+    }
     let wordsToAdd = [];
     if(cook[0] != '0'){
         for (const word of cook){
@@ -505,13 +519,6 @@ if (!document.cookie){
         }
         startRow = fillRows(wordsToAdd);
         wordsGuessed = wordsToAdd;
-    }
-    if(splitcookie.length <= 2){
-        document.cookie = `rounds=0; expires=${nineMonths}`;
-        document.cookie = `points=0; expires=${nineMonths}`;
-    } else{
-        overallRounds = splitcookie[1].split('=')[1];
-        overallPoints = splitcookie[2].split('=')[1];
     }
 }
 
