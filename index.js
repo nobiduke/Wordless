@@ -509,8 +509,8 @@ if (!document.cookie){
         document.cookie = `rounds=0; expires=${nineMonths}`;
         document.cookie = `points=0; expires=${nineMonths}`;
     } else{
-        overallRounds = int([2].split('=')[1]);
-        overallPoints = int([4].split('=')[1]);
+        overallRounds = [2].split('=')[1];
+        overallPoints = [4].split('=')[1];
     }
 }
 
