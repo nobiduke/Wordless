@@ -495,9 +495,10 @@ if (!document.cookie){
 } else{
     console.log(document.cookie);
     splitcookie = document.cookie.split(';')
+    let cook = [0];
     for (const cooky of splitcookie){
         if (cooky.split('=')[0] == 'words'){
-            var cook = cooky.split('=')[1].split(',');
+            cook = cooky.split('=')[1].split(',');
         }
         else if(cooky.split('=')[0] == 'rounds'){
             overallRounds = cooky.split('=')[1];
