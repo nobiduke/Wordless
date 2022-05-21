@@ -493,6 +493,7 @@ if (!document.cookie){
     document.cookie = `points=0; expires=${nineMonths}`; 
 
 } else{
+    console.log(document.cookie);
     splitcookie = document.cookie.split(';')
     cook = splitcookie[0].split('=')[1].split(',');
     let wordsToAdd = [];
