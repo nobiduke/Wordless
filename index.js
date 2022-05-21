@@ -17,6 +17,8 @@ let wordChoice = String;
 let lettersGuessed = [];
 let wordsGuessed = [];
 let wordList = [];
+let overallPoints = 0;
+let overallRounds = 0;
 
 let rowNumber = 0;
 let colNumber = 0;
@@ -136,7 +138,8 @@ function createShareText(){
 
 function victoryPopup() {
     let vText = document.getElementById("victory-text");
-    vText.innerHTML = `Victory in ${rowNumber+1} guesses\n ${totalScore} points`
+    vText.innerHTML = `Victory in ${rowNumber+1} guesses\n ${totalScore} points\n\n\n Average Score: ${overallPoints/overallRounds}`;
+    vText.innerHTML += `\nTotal Rounds Played: ${overallRounds} \nTotal Points Scored: ${overallPoints}`;
     
     let outputText = createShareText();
     
@@ -303,6 +306,8 @@ document.addEventListener("keyup", function(event){
             if (!startingUp){
                 wordsGuessed.push(wordChoice);
                 let midnight = new Date();
+                // let nineMonths = new Date();
+                // nineMonths.setMonth(nineMonths.getMonth()+9)
                 midnight.setHours(23,59,59,0);
                 document.cookie = "words= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
                 document.cookie = `words=${wordsGuessed.toString()}; expires=${midnight}`;
@@ -313,6 +318,13 @@ document.addEventListener("keyup", function(event){
                     gameOver = true;
                     rowNumber--;
                     console.log(`Victory with ${totalScore} points`);
+                    let nineMonths = new Date();
+                    nineMonths.setMonth(nineMonths.getMonth()+9);
+                    overallPoints += totalScore;
+                    overallRounds += 1;
+                    document.cookie = `rounds=${overallRounds}; expires${nineMonths}`;
+                    document.cookie = `points=${overallPoints}; expires${nineMonths}`;
+
                     victoryPopup();
                 }
             }
@@ -454,6 +466,7 @@ let wordHateAsList = [];
 startGame();
 let lettersLeft = [];
 
+
 for (const elem of document.getElementsByClassName("keyboard-button")){
     if (elem.textContent != "Del" && elem.textContent != "Enter"){
         elem.innerHTML = elem.innerHTML + "<sub>" + L_POINTS[elem.textContent] + "</sub>";
@@ -470,11 +483,16 @@ for (const letter of ALPHABET){
 
 if (!document.cookie){
     let midnight = new Date();
+    let nineMonths = new Date();
+    nineMonths.setMonth(nineMonths.getMonth()+9)
     midnight.setHours(23,59,59,0);
     document.cookie = `words=0; expires=${midnight}`;
+    document.cookie = `rounds=0; expires=${nineMonths}`;
+    document.cookie = `points=0; expires=${nineMonths}`; 
 
 } else{
-    cook = document.cookie.split(';')[0].split('=')[1].split(',');
+    splitcookie = document.cookie.split(';')
+    cook = splitcookie[0].split('=')[1].split(',');
     let wordsToAdd = [];
     if(cook[0] != '0'){
         for (const word of cook){
@@ -484,6 +502,13 @@ if (!document.cookie){
         }
         startRow = fillRows(wordsToAdd);
         wordsGuessed = wordsToAdd;
+    }
+    if(splitcookie.length <= 2){
+        document.cookie = `rounds=0; expires=${nineMonths}`;
+        document.cookie = `points=0; expires=${nineMonths}`;
+    } else{
+        overallRounds = int([2].split('=')[1]);
+        overallPoints = int([4].split('=')[1]);
     }
 }
 
