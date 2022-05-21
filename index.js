@@ -481,10 +481,12 @@ for (const letter of ALPHABET){
     }
 }
 
+let nineMonths = new Date();
+nineMonths.setMonth(nineMonths.getMonth()+9)
+
 if (!document.cookie){
     let midnight = new Date();
-    let nineMonths = new Date();
-    nineMonths.setMonth(nineMonths.getMonth()+9)
+
     midnight.setHours(23,59,59,0);
     document.cookie = `words=0; expires=${midnight}`;
     document.cookie = `rounds=0; expires=${nineMonths}`;
