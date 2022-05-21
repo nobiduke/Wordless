@@ -503,10 +503,10 @@ if (!document.cookie){
             }
         }
         else if(cooky.split('=')[0] == 'rounds' || cooky.split('=')[0] == ' rounds'){
-            overallRounds = cooky.split('=')[1];
+            overallRounds = parseInt(cooky.split('=')[1]);
         } 
         else if (cooky.split('=')[0] == 'points' || cooky.split('=')[0] == ' points'){
-            overallPoints = cooky.split('=')[1];
+            overallPoints = parseInt(cooky.split('=')[1]);
         }
     }
     if(splitcookie.length < 2){
