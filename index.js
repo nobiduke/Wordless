@@ -138,8 +138,8 @@ function createShareText(){
 
 function victoryPopup() {
     let vText = document.getElementById("victory-text");
-    vText.innerHTML = `Victory in ${rowNumber+1} guesses\n ${totalScore} points\n\n\n Average Score: ${overallPoints/overallRounds}`;
-    vText.innerHTML += `\nTotal Rounds Played: ${overallRounds} \nTotal Points Scored: ${overallPoints}`;
+    vText.innerHTML = `Victory in ${rowNumber+1} guesses<br> ${totalScore} points<br><br><br> Average Score: ${overallPoints/overallRounds}`;
+    vText.innerHTML += `<br>Total Rounds Played: ${overallRounds} <br>Total Points Scored: ${overallPoints}`;
     
     let outputText = createShareText();
     
