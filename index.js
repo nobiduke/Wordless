@@ -501,9 +501,9 @@ if (!document.cookie){
             cook = cooky.split('=')[1].split(',');
         }
         else if(cooky.split('=')[0] == 'rounds'){
-            overallRounds = splitcookie[1].split('=')[1];
+            overallRounds = cooky.split('=')[1];
         } else if (cooky.split('=')[0] == 'points'){
-            overallPoints = splitcookie[2].split('=')[1];
+            overallPoints = cooky.split('=')[1];
         }
     }
     if(splitcookie.length <= 2){
