@@ -497,15 +497,15 @@ if (!document.cookie){
     splitcookie = document.cookie.split(';')
     let cook = [];
     for (const cooky of splitcookie){
-        if (cooky.split('=')[0] == 'words'){
+        if (cooky.split('=')[0] == 'words' || cooky.split('=')[0] == ' words'){
             for (const word of cooky.split('=')[1].split(',')){
                 cook.push(word);
             }
         }
-        else if(cooky.split('=')[0] == 'rounds'){
+        else if(cooky.split('=')[0] == 'rounds' || cooky.split('=')[0] == ' rounds'){
             overallRounds = cooky.split('=')[1];
         } 
-        else if (cooky.split('=')[0] == 'points'){
+        else if (cooky.split('=')[0] == 'points' || cooky.split('=')[0] == ' points'){
             overallPoints = cooky.split('=')[1];
         }
     }
