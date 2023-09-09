@@ -138,20 +138,20 @@ function createShareText(){
 
 function victoryPopup() {
     let vText = document.getElementById("victory-text");
-    vText.innerHTML = `Victory in ${rowNumber+1} guesses<br> ${totalScore} points<br><br><br> Average Score: ${overallPoints/overallRounds}`;
-    vText.innerHTML += `<br>Total Rounds Played: ${overallRounds} <br>Total Points Scored: ${overallPoints}`;
+    vText.innerHTML = `Victory in ${rowNumber+1} guesses<br> ${totalScore} points!`; //`{<br><br><br> Average Score: ${overallPoints/overallRounds}`;
+    //vText.innerHTML += `<br>Total Rounds Played: ${overallRounds} <br>Total Points Scored: ${overallPoints}`;
     
     let outputText = createShareText();
     
     let shareButton = document.getElementById("share-button");
     shareButton.addEventListener("click", function(e){
-        if (navigator.share && navigator.userAgent != "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36") {
+        if (navigator.share && navigator.userAgent != "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36") {
             navigator.share({
                 title: document.title,
-                text: createShareText(),
-                url: window.location.href
+                text: outputText,
+                url: null
             })
-            .then(() => console.log('Successful share'))
+            .then(() => {console.log('Successful share')})
             .catch(error => console.log('Error sharing:', error));
         }
         
